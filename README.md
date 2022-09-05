@@ -7,3 +7,11 @@ e/q      rotate
 w/a/s/d  moving
 mouse    rotate camera
 ~~~
+
+## Cells
+~~~
+Mover
+Trash
+Immobile
+CWRotator (sus)
+~~~
