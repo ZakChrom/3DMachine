@@ -13,5 +13,5 @@ mouse    rotate camera
 Mover
 Trash
 Immobile
-CWRotator (sus)
+Fixed Rotator
 ~~~
