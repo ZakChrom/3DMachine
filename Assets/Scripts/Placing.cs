@@ -56,7 +56,9 @@ public class Placing : MonoBehaviour
 					pos.y = Mathf.RoundToInt(hitInfo2.point.y+hitInfo2.normal.y/2);
 					pos.z = Mathf.RoundToInt(hitInfo2.point.z+hitInfo2.normal.z/2);
 					temp.transform.position = pos;
-					temp.transform.localEulerAngles = rotations[rotIndex];
+					StopAllCoroutines();
+					StartCoroutine(Rotate(rotations[rotIndex]));
+					//temp.transform.localEulerAngles = rotations[rotIndex];
 				} else {
 					pos.x = Mathf.RoundToInt(hitInfo2.point.x);
 					pos.y = Mathf.RoundToInt(hitInfo2.point.y);
@@ -115,4 +117,12 @@ public class Placing : MonoBehaviour
 			}
 		}
 	}
+	IEnumerator Rotate(Vector3 targetAngle) {
+		while (temp.transform.eulerAngles != targetAngle) {
+			temp.transform.rotation = Quaternion.Slerp(temp.transform.rotation, Quaternion.Euler(targetAngle), 9f * Time.deltaTime);
+			yield return null;
+		}
+		temp.transform.rotation = Quaternion.Euler(targetAngle);
+		yield return null;
+	}  
 }

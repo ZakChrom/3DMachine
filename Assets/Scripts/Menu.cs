@@ -44,4 +44,7 @@ public class Menu : MonoBehaviour
 	public void Reload() {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
+	public void Back() {
+		SceneManager.LoadScene(0);
+	}
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
 	private bool immobile, enemy, generated, slider, trash, weak;
+	
 	private Vector3 orgpos, pos;
     void Start()
     {
@@ -80,7 +81,8 @@ public class Cell : MonoBehaviour
     }
 	
     public void SetRotation(Quaternion dir) {
-		transform.rotation = dir;
+		StopAllCoroutines();
+		StartCoroutine(RotateSmoothly(dir.eulerAngles));
     }
 	public void Rotate(Quaternion dir) {
 		transform.rotation *= dir;
@@ -117,4 +119,12 @@ public class Cell : MonoBehaviour
 	public void SetWeak() {
 		weak = true;
     }
+	IEnumerator RotateSmoothly(Vector3 targetAngle) {
+		while (transform.eulerAngles != targetAngle) {
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetAngle), 9f * Time.deltaTime);
+			yield return null;
+		}
+		transform.rotation = Quaternion.Euler(targetAngle);
+		yield return null;
+	}  
 }
