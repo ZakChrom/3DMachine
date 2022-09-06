@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 9113564135896650428}
   - component: {fileID: 2404927206825933257}
   m_Layer: 8
-  m_Name: mover
+  m_Name: Mover
   m_TagString: cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,7 +561,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f212493d3789c664182976e59c5e7684, type: 2}
+  - {fileID: 2100000, guid: 1ddbb05f1af41ab47b90b0fb0c737fa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
