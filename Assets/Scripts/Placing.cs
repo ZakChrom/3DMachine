@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Placing : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class Placing : MonoBehaviour
 	public GameObject inventoryCell;
 	
 	public GameObject hover;
-	public GameObject temp;
+	public GameObject inventoryText;
+	private GameObject temp;
 	
 	public GameObject player;
 	
@@ -74,6 +76,7 @@ public class Placing : MonoBehaviour
 			Destroy(inventoryCell);
 			inventoryCell = inventory[inventoryIndex];
 			inventoryCell = Instantiate(inventoryCell, t, q);
+			inventoryText.GetComponent<TextMeshProUGUI>().text = inventoryCell.gameObject.name.Substring(0,inventoryCell.gameObject.name.Length-7);
 			if(Input.GetMouseButtonDown(0)){
 				Place(inventory[inventoryIndex]);
 			}
