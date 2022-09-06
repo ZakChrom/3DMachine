@@ -14,10 +14,12 @@ public class PlayerMovement : MonoBehaviour
 	public LayerMask groundMask;
 	
 	public Transform groundCheck;
+	public Transform ceilingCheck;
 	
 	Vector3 velocity;
 	Vector3 startingPos = new Vector3(0,-3,0);
 	bool isGrounded;
+	bool isCeiling;
 	bool inMenu;
     // Start is called before the first frame update
     void Start()
@@ -31,8 +33,11 @@ public class PlayerMovement : MonoBehaviour
 		inMenu = GameObject.FindGameObjectWithTag("Menu").GetComponent<Menu>().inMenu;
 		if(!inMenu) {
 			isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-			
+			isCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, groundMask);
 			if (isGrounded && velocity.y < 0) {
+				velocity.y = -2f;
+			}
+			if (isCeiling) {
 				velocity.y = -2f;
 			}
 			
