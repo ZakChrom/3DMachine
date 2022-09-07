@@ -7,6 +7,7 @@ e/q      rotate
 w/a/s/d  moving
 mouse    rotate camera
 esc      open the menu
+r        play/pause the simulation
 ~~~
 
 ## Cells
