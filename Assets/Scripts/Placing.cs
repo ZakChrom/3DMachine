@@ -77,6 +77,7 @@ public class Placing : MonoBehaviour
 			inventoryCell = inventory[inventoryIndex];
 			inventoryCell = Instantiate(inventoryCell, t, q);
 			inventoryText.GetComponent<TextMeshProUGUI>().text = inventoryCell.gameObject.name.Substring(0,inventoryCell.gameObject.name.Length-7);
+			inventoryCell.gameObject.name = "inventoryCell";
 			if(Input.GetMouseButtonDown(0)){
 				Place(inventory[inventoryIndex]);
 			}

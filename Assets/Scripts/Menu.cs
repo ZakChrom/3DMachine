@@ -47,4 +47,7 @@ public class Menu : MonoBehaviour
 	public void Back() {
 		SceneManager.LoadScene(0);
 	}
+	public void noMenu() {
+		inMenu = !inMenu;
+	}
 }

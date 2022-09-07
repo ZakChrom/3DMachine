@@ -10,4 +10,15 @@ public class CellFunctions : MonoBehaviour
 			running = !running;
 		}
 	}
+	public void Reset() {
+		foreach (GameObject g in GameObject.FindGameObjectsWithTag("cell")) {
+			g.GetComponent<Cell>().Reset();
+		}
+	}
+	public void Save() {
+		GUIUtility.systemCopyBuffer = Worlds.Save();
+	}
+	public void Load() {
+		Worlds.Load();
+	}
 }

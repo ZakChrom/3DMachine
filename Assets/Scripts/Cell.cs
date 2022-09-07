@@ -25,7 +25,7 @@ public class Cell : MonoBehaviour
 		pos += Vector3.Normalize(transform.position-transform.GetChild(0).position)*Time.deltaTime*5f;
 		if((pos-transform.position).magnitude <= 0.1f)
 		{
-		pos = transform.position;
+			pos = transform.position;
 		}
 		transform.GetChild(0).position = pos;
 	}
@@ -44,9 +44,10 @@ public class Cell : MonoBehaviour
 			foreach(GameObject g in GameObject.FindGameObjectsWithTag("cell")) {
 				if(g.transform.position == transform.position+dir) {
 					if(!g.GetComponent<Cell>().isPushable(dir) || (weak & pusher == this)) {
-					canmove = false;
+						canmove = false;
 					} else {
-						g.GetComponent<Cell>().Move(dir, this);
+						g.transform.position += dir;
+						//g.GetComponent<Cell>().Move(dir, this);
 					}
 				}
 			}
