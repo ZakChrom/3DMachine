@@ -7,7 +7,7 @@ This Cell Machine "remake" uses alot of code from CMMM, so it has the same licen
 ## Controls
 ~~~
 e/q      rotate
-1/2      switch cells
+z/x      switch cells
 w/a/s/d  moving
 mouse    rotate camera
 esc      open the menu

@@ -95,10 +95,10 @@ public class Placing : MonoBehaviour
 			else if (Input.GetKeyDown("q")) {
 				rotIndex -= 1;
 			}
-			else if (Input.GetKeyDown("1")) {
+			else if (Input.GetKeyDown("z")) {
 				inventoryIndex -= 1;
 			}
-			else if (Input.GetKeyDown("2")) {
+			else if (Input.GetKeyDown("x")) {
 				inventoryIndex += 1;
 			}
 		}
