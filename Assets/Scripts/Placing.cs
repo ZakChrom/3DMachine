@@ -53,7 +53,7 @@ public class Placing : MonoBehaviour
 		if(!inMenu) {
 			if(Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out RaycastHit hitInfo2, reach, ignore)) {
 				Debug.DrawRay(this.transform.position, this.transform.TransformDirection(Vector3.forward) * hitInfo2.distance, Color.red);
-				if(hitInfo2.transform.tag == "cell") {
+				if(hitInfo2.transform.tag == "cell" || hitInfo2.transform.tag == "ground") {
 					pos.x = Mathf.RoundToInt(hitInfo2.point.x+hitInfo2.normal.x/2);
 					pos.y = Mathf.RoundToInt(hitInfo2.point.y+hitInfo2.normal.y/2);
 					pos.z = Mathf.RoundToInt(hitInfo2.point.z+hitInfo2.normal.z/2);
@@ -106,7 +106,7 @@ public class Placing : MonoBehaviour
 	void Place(GameObject block) {
 		if(Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out RaycastHit hitInfo, reach, ignore)) {
 			Debug.DrawRay(this.transform.position, this.transform.TransformDirection(Vector3.forward) * hitInfo.distance, Color.red);
-			if(hitInfo.transform.tag == "cell") {
+			if(hitInfo.transform.tag == "cell" || hitInfo.transform.tag == "ground") {
 				pos.x = Mathf.RoundToInt(hitInfo.point.x+hitInfo.normal.x/2);
 				pos.y = Mathf.RoundToInt(hitInfo.point.y+hitInfo.normal.y/2);
 				pos.z = Mathf.RoundToInt(hitInfo.point.z+hitInfo.normal.z/2);

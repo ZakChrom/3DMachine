@@ -168,10 +168,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8340245511778859250}
   - component: {fileID: 3564376601794489063}
-  - component: {fileID: -8288576483660986240}
   - component: {fileID: -3069676120519071367}
   m_Layer: 8
-  m_Name: FixedRotator
+  m_Name: Fixed Rotator
   m_TagString: cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,18 +205,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &-8288576483660986240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3742656327274322764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f5cfc93e87c9e4da23a386e52f1515, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3069676120519071367
 MonoBehaviour:
   m_ObjectHideFlags: 0
