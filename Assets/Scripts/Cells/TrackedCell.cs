@@ -38,18 +38,18 @@ public class TrackedCell : Cell
     public uint GetDistanceFromFacingEdge() {
         switch (this.getDirection())
         {
-            case (Direction_e.RIGHT):
-                return (uint)(CellFunctions.gridWidth - this.position.x - 1);
-            case (Direction_e.UP):
-                return (uint)(CellFunctions.gridHeight - this.position.y - 1);
-            case (Direction_e.LEFT):
-                return (uint)this.position.x;
-            case (Direction_e.DOWN):
-                return (uint)this.position.y;
 			case (Direction_e.FRONT):
                 return (uint)(CellFunctions.gridLength - this.position.z - 1);
+            case (Direction_e.RIGHT):
+                return (uint)(CellFunctions.gridWidth - this.position.x - 1);
+            case (Direction_e.DOWN):
+                return (uint)this.position.y;
 			case (Direction_e.BACK):
                 return (uint)this.position.z;
+            case (Direction_e.LEFT):
+                return (uint)this.position.x;
+			case (Direction_e.UP):
+                return (uint)(CellFunctions.gridHeight - this.position.y - 1);
             default:
                 break;
         }
@@ -60,7 +60,7 @@ public class TrackedCell : Cell
     {
         (bool, bool) pushResult = base.Push(dir, bias);
         if (pushResult.Item1 && !pushResult.Item2) {
-            if ((dir == this.getDirection() || dir == (Direction_e)(((int)this.getDirection() + 2) % 6))  && !deleted) {
+            if ((dir == this.getDirection() || dir == (Direction_e)(((int)this.getDirection() + 3) % 6))  && !deleted) {
                 this.queueForPositionSorting();
             }
         }

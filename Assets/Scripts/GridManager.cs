@@ -251,15 +251,15 @@ public class GridManager : MonoBehaviour
             if (cell.animate)
             {
                 cell.transform.position = Vector3.Lerp(
-                new Vector3(cell.oldPosition.x, cell.oldPosition.y, cell.oldPosition.z),
-                new Vector3(cell.position.x, cell.position.y, cell.oldPosition.z),
-                timeSinceLastUpdate / animationLength
+					new Vector3(cell.oldPosition.x, cell.oldPosition.y, cell.oldPosition.z),
+					new Vector3(cell.position.x, cell.position.y, cell.oldPosition.z),
+					timeSinceLastUpdate / animationLength
                 );
                 cell.transform.rotation = Quaternion.Lerp(
                     Quaternion.Euler(0, 0, cell.oldRotation * -90),
                     Quaternion.Euler(0, 0, cell.rotation * -90),
                     timeSinceLastUpdate / animationLength
-                    );
+                );
             }
         }
         if (timeSinceLastUpdate > animationLength && (playSimulation || stepSimulation)) {
