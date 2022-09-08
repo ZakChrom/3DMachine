@@ -8073,7 +8073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8d66efe530fb34f887519f5cf85f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 2104232815}
   cellPrefabs:
   - {fileID: 3742656327274322764, guid: 51b5d63bca05b4e43840393018db3011, type: 3}
   - {fileID: 3742656327274322764, guid: ab3b67ccb474c1f45a3ef6a06b655ef9, type: 3}
@@ -8612,7 +8612,6 @@ MonoBehaviour:
   hover: {fileID: 3742656327274322764, guid: 0992b188337116d439eb6db168d06a08, type: 3}
   inventoryText: {fileID: 761223503}
   player: {fileID: 1066140661}
-  rotIndex: 0
   ignore:
     serializedVersion: 2
     m_Bits: 256
