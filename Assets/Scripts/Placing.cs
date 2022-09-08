@@ -16,7 +16,7 @@ public class Placing : MonoBehaviour
 	
 	public GameObject player;
 	
-	public Vector3[] rotations = new Vector3[6];
+	public static Vector3[] rotations = new Vector3[6];
 	public int rotIndex = 0;
 	
 	public LayerMask ignore;
@@ -33,10 +33,10 @@ public class Placing : MonoBehaviour
 		
 		rotations[0] = new Vector3(0, 0, 0);
 		rotations[1] = new Vector3(0, 90, 0);
-		rotations[2] = new Vector3(0, 180, 0);
-		rotations[3] = new Vector3(0, 270, 0);
-		rotations[4] = new Vector3(-90, 0, 0);
-		rotations[5] = new Vector3(90, 0, 0);
+		rotations[3] = new Vector3(0, 180, 0);
+		rotations[4] = new Vector3(0, 270, 0);
+		rotations[5] = new Vector3(-90, 0, 0);
+		rotations[2] = new Vector3(90, 0, 0);
 		
 		temp = Instantiate(hover, pos, Quaternion.identity);
 		temp.transform.localEulerAngles = rotations[rotIndex];
@@ -85,7 +85,7 @@ public class Placing : MonoBehaviour
 				if(Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out RaycastHit hitInfo, reach, ignore)) {
 					Debug.DrawRay(this.transform.position, this.transform.TransformDirection(Vector3.forward) * hitInfo.distance, Color.red);
 					if(hitInfo.transform.tag == "cell" && hitInfo.transform.gameObject.name != "ground") {
-						Destroy(hitInfo.transform.gameObject);
+						hitInfo.transform.gameObject.GetComponent<Cell>().Delete(true);
 					}
 				}
 			}
@@ -110,14 +110,18 @@ public class Placing : MonoBehaviour
 				pos.x = Mathf.RoundToInt(hitInfo.point.x+hitInfo.normal.x/2);
 				pos.y = Mathf.RoundToInt(hitInfo.point.y+hitInfo.normal.y/2);
 				pos.z = Mathf.RoundToInt(hitInfo.point.z+hitInfo.normal.z/2);
-				GameObject a = Instantiate(block, pos, Quaternion.Euler(0,0,0));
-				a.transform.localEulerAngles = rotations[rotIndex];
+				Cell c = GridManager.instance.SpawnCell(CellType_e.MOVER, pos, rotations[rotIndex], (Direction_e)rotIndex, false);
+				c.setPosition(pos);
+				//GameObject a = Instantiate(block, pos, Quaternion.Euler(0,0,0));
+				//a.transform.localEulerAngles = rotations[rotIndex];
 			} else {
 				pos.x = Mathf.RoundToInt(hitInfo.point.x);
 				pos.y = Mathf.RoundToInt(hitInfo.point.y);
 				pos.z = Mathf.RoundToInt(hitInfo.point.z);
-				GameObject a = Instantiate(block, pos, Quaternion.Euler(0,0,0));
-				a.transform.localEulerAngles = rotations[rotIndex];
+				Cell c = GridManager.instance.SpawnCell(CellType_e.MOVER, pos, rotations[rotIndex], (Direction_e)rotIndex, false);
+				c.setPosition(pos);
+				//GameObject a = Instantiate(block, pos, Quaternion.Euler(0,0,0));
+				//a.transform.localEulerAngles = rotations[rotIndex];
 			}
 		}
 	}

@@ -6047,8 +6047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc33b025a642fb4bb69bb5b35eeba12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 0}
-  running: 0
+  gridManager: {fileID: 1833241598}
 --- !u!4 &871864495
 Transform:
   m_ObjectHideFlags: 0
@@ -6087,7 +6086,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885880834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.81765366, y: -1.6970079, z: 2.259767}
+  m_LocalPosition: {x: 50.3, y: 6.3, z: 83.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1778564706}
@@ -6483,7 +6482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066140661}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.31, z: 0}
+  m_LocalPosition: {x: 51.1, y: 5.71, z: 81.24}
   m_LocalScale: {x: 0.8, y: 0.9, z: 0.8}
   m_Children:
   - {fileID: 1859367547}
@@ -6523,6 +6522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1066140663}
+  player: {fileID: 1066140661}
   speed: 12
   gravity: -29.43
   groundDistance: 0.2
@@ -8072,7 +8072,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8d66efe530fb34f887519f5cf85f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellPrefabs: []
+  cellPrefabs:
+  - {fileID: 3742656327274322764, guid: 51b5d63bca05b4e43840393018db3011, type: 3}
+  - {fileID: 3742656327274322764, guid: 24d82782ea766484dab8120d101415dd, type: 3}
+  - {fileID: 3742656327274322764, guid: 1ddb59739fced764aacd4ca8e8665112, type: 3}
+  - {fileID: 3742656327274322764, guid: 9c26a23c8c43c5643939ade0a778efa3, type: 3}
 --- !u!4 &1833241600
 Transform:
   m_ObjectHideFlags: 0
@@ -8101,7 +8105,7 @@ GameObject:
   - component: {fileID: 1858761816}
   m_Layer: 8
   m_Name: ground
-  m_TagString: cell
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8174,7 +8178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858761815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -4, z: 0.5}
+  m_LocalPosition: {x: 51.6, y: 4, z: 81.74}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8604,13 +8608,6 @@ MonoBehaviour:
   hover: {fileID: 3742656327274322764, guid: 0992b188337116d439eb6db168d06a08, type: 3}
   inventoryText: {fileID: 761223503}
   player: {fileID: 1066140661}
-  rotations:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 90, z: 0}
-  - {x: 0, y: 180, z: 0}
-  - {x: 0, y: 270, z: 0}
-  - {x: -90, y: 0, z: 0}
-  - {x: 90, y: 0, z: 0}
   rotIndex: 0
   ignore:
     serializedVersion: 2

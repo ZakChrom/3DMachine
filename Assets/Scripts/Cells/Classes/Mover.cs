@@ -6,9 +6,11 @@ public class Mover : TrackedCell
 {
     public override void Step()
     {
+		Debug.Log("a");
         this.Push(this.getDirection(), 0);
         //Suppressed will get set to true so we have to reset it.
         this.suppresed = false;
+		this.UpdatePosAndRot();
     }
 
     public override (bool, bool) Push(Direction_e dir, int bias)

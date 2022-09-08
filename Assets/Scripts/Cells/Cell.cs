@@ -5,7 +5,6 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     public CellType_e cellType;
-
     //Old rotations and positions saved for animations.
     public Vector3 position;
     public Vector3 oldPosition;
@@ -52,14 +51,14 @@ public class Cell : MonoBehaviour
         deleted = false;
         if (CellFunctions.cellGrid[(int)position.x, (int)position.y, (int)position.z] != null)
         {
-            Cell other = CellFunctions.cellGrid[(int)position.x, (int)position.y, (int)position.y];
+            Cell other = CellFunctions.cellGrid[(int)position.x, (int)position.y, (int)position.z];
             other.Delete(true);
         }
         this.position = position;
         this.spawnPosition = position;
         this.rotation = (int)rotation;
         this.spawnRotation = (int)rotation;
-        CellFunctions.cellGrid[(int)position.x, (int)position.y, (int)position.y] = this;
+        CellFunctions.cellGrid[(int)position.x, (int)position.y, (int)position.z] = this;
         if (cellListNode == null)
             cellListNode = CellFunctions.cellList.AddLast(this);
         if(generated)
@@ -77,6 +76,11 @@ public class Cell : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+	public void UpdatePosAndRot() {
+		gameObject.transform.position = this.position;
+		gameObject.transform.eulerAngles = Placing.rotations[this.rotation];
+	}
 
     //Called when attempting to move.
     // the first bool is weather the cell can move, the second is weather it gets destroyed by moving
@@ -113,12 +117,12 @@ public class Cell : MonoBehaviour
 
         if (bias < 1) return (false, false);
 
-        if (CellFunctions.cellGrid[targetX, targetY, targetY] == null)
+        if (CellFunctions.cellGrid[targetX, targetY, targetZ] == null)
         {
-            this.setPosition(targetX, targetY, targetY);
+            this.setPosition(targetX, targetY, targetZ);
             return (true, false);
         }
-        (bool, bool) pushResult = CellFunctions.cellGrid[targetX, targetY, targetY].Push(dir, bias);
+        (bool, bool) pushResult = CellFunctions.cellGrid[targetX, targetY, targetZ].Push(dir, bias);
         //if its a cell that deletes other cells
         if (pushResult.Item2)
         {
@@ -127,7 +131,7 @@ public class Cell : MonoBehaviour
         }
         if (pushResult.Item1)
         {
-            this.setPosition(targetX, targetY, targetY);
+            this.setPosition(targetX, targetY, targetZ);
             return (true, false);
         }
         return (false, false);

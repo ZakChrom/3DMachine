@@ -5,7 +5,11 @@ using UnityEngine;
 public class CellFunctions : MonoBehaviour
 {	
 	public GameObject gridManager;
+	public GameObject player;
+	private static GameObject[] inventory;
+	
 	void Start() {
+		inventory = player.GetComponent<Placing>().inventory;
 		gridHeight = 100;
 		gridWidth = 100;
 		gridLength = 100;
@@ -79,4 +83,15 @@ public class CellFunctions : MonoBehaviour
         return cellUpdateTypeDictionary[type];
     }
 	
+	public static CellType_e PrefabToCellType_e(GameObject prefab) {
+		CellType_e r = CellType_e.WALL;
+		if (prefab == inventory[0]) {
+			r = CellType_e.MOVER;
+		} else if (prefab == inventory[1]) {
+			
+		} else {
+			throw throw new Exception("Me when u forgor to update this if :skull:");
+		}
+		return r;
+	}
 }

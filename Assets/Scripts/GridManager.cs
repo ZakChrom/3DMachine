@@ -112,7 +112,10 @@ public class GridManager : MonoBehaviour
         {
             for (int dir = 0; dir < 6; dir++)
             {
-                int maxDistince = dir % 2 == 0 ? CellFunctions.gridWidth : CellFunctions.gridHeight;
+				int maxDistince = dir % 2 == 0 ? CellFunctions.gridWidth : CellFunctions.gridHeight;
+				if (dir % 4 == 0) {
+					int maxDistance = CellFunctions.gridLength;
+				}
                 CellFunctions.trackedCells[steppedCellId, dir] = new LinkedList<Cell>[maxDistince];
                 for (int distance = 0; distance < maxDistince; distance++)
                 {
@@ -127,13 +130,13 @@ public class GridManager : MonoBehaviour
         initialEnemyCount = enemyCount;
     }
 
-    public Cell SpawnCell(CellType_e cellType, Vector3 position, Direction_e rotation, bool generated) {
+    public Cell SpawnCell(CellType_e cellType, Vector3 position, Vector3 rotation, Direction_e rotation2, bool generated) {
         Cell cell = Instantiate(this.cellPrefabs[(int)cellType]).GetComponent<Cell>();
         cell.transform.position = new Vector3(position.x, position.y, position.z);
-        cell.Setup(position, rotation, generated);
+        cell.Setup(position, rotation2, generated);
         cell.oldPosition = position;
-        cell.oldRotation = (int)rotation;
-        cell.transform.rotation = Quaternion.Euler(0, 0, -90 * (int)rotation);
+        cell.oldRotation = (int)rotation2;
+        cell.transform.rotation = Quaternion.Euler(rotation);
         cell.name = CellFunctions.cellList.Count + "";
 
         return cell;
@@ -159,9 +162,12 @@ public class GridManager : MonoBehaviour
     }
 
     private void UpdateTracked(CellType_e cellType, Direction_e dir) {
-        
+		//Debug.Log("UpdateTracked");
         int maxDistance;
-        if ((int)dir % 2 == 0)
+		if ((int)dir % 4 == 0) {
+			maxDistance = CellFunctions.gridLength;
+		}
+        else if ((int)dir % 2 == 0)
         {
             maxDistance = CellFunctions.gridWidth;
         }
@@ -172,6 +178,7 @@ public class GridManager : MonoBehaviour
 
             LinkedListNode<Cell> selectedNode = CellFunctions.trackedCells[CellFunctions.GetSteppedCellId(cellType), (int)dir][distance].First;
             TrackedCell cell;
+			//Debug.Log("selectedNode null check");
             while (selectedNode != null)
             {
                 cell = (TrackedCell)selectedNode.Value;
@@ -180,6 +187,11 @@ public class GridManager : MonoBehaviour
                 if (cell.suppresed)
                 {
                     cell.suppresed = false;
+                }
+				else
+                {
+					//Debug.Log("Step should be called (GridManager.cs)");
+                    cell.Step();
                 }
             }
         }

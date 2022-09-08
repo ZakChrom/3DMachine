@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	public CharacterController controller;
+	public GameObject player;
 	
 	public float speed = 12f;
 	public float gravity = -9.81f;
@@ -17,14 +18,14 @@ public class PlayerMovement : MonoBehaviour
 	public Transform ceilingCheck;
 	
 	Vector3 velocity;
-	Vector3 startingPos = new Vector3(0,-3,0);
+	Vector3 startingPos;
 	bool isGrounded;
 	bool isCeiling;
 	bool inMenu;
     // Start is called before the first frame update
     void Start()
     {
-		
+		startingPos = player.transform.position;
     }
 
     // Update is called once per frame
