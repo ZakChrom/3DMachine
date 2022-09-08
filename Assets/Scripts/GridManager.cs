@@ -7,6 +7,8 @@ using System;
 public class GridManager : MonoBehaviour
 {
     public static GridManager instance;
+
+	public GameObject player;
 	
     public static int currentLevel;
     public static int enemyCount;
@@ -131,12 +133,23 @@ public class GridManager : MonoBehaviour
     }
 
     public Cell SpawnCell(CellType_e cellType, Vector3 position, Vector3 rotation, Direction_e rotation2, bool generated) {
-        Cell cell = Instantiate(this.cellPrefabs[(int)cellType]).GetComponent<Cell>();
+        Cell cell = Instantiate(player.GetComponent<Placing>().inventory[(int)cellType]).GetComponent<Cell>();
         cell.transform.position = new Vector3(position.x, position.y, position.z);
         cell.Setup(position, rotation2, generated);
         cell.oldPosition = position;
         cell.oldRotation = (int)rotation2;
-        cell.transform.rotation = Quaternion.Euler(rotation);
+        cell.transform.eulerAngles = rotation;
+        cell.name = CellFunctions.cellList.Count + "";
+
+        return cell;
+    }
+	public Cell SpawnCell(GameObject c, Vector3 position, Vector3 rotation, Direction_e rotation2, bool generated) {
+        Cell cell = Instantiate(c).GetComponent<Cell>();
+        cell.transform.position = new Vector3(position.x, position.y, position.z);
+        cell.Setup(position, rotation2, generated);
+        cell.oldPosition = position;
+        cell.oldRotation = (int)rotation2;
+        cell.transform.eulerAngles = rotation;
         cell.name = CellFunctions.cellList.Count + "";
 
         return cell;
@@ -251,13 +264,13 @@ public class GridManager : MonoBehaviour
             if (cell.animate)
             {
                 cell.transform.position = Vector3.Lerp(
-					new Vector3(cell.oldPosition.x, cell.oldPosition.y, cell.oldPosition.z),
-					new Vector3(cell.position.x, cell.position.y, cell.oldPosition.z),
+					cell.oldPosition,
+					cell.position,
 					timeSinceLastUpdate / animationLength
                 );
                 cell.transform.rotation = Quaternion.Lerp(
-                    Quaternion.Euler(0, 0, cell.oldRotation * -90),
-                    Quaternion.Euler(0, 0, cell.rotation * -90),
+                    Quaternion.Euler(Placing.rotations[cell.oldRotation]),
+                    Quaternion.Euler(Placing.rotations[cell.rotation]),
                     timeSinceLastUpdate / animationLength
                 );
             }

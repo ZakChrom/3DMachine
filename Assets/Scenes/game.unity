@@ -8073,11 +8073,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8d66efe530fb34f887519f5cf85f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   cellPrefabs:
   - {fileID: 3742656327274322764, guid: 51b5d63bca05b4e43840393018db3011, type: 3}
-  - {fileID: 3742656327274322764, guid: 24d82782ea766484dab8120d101415dd, type: 3}
+  - {fileID: 3742656327274322764, guid: ab3b67ccb474c1f45a3ef6a06b655ef9, type: 3}
   - {fileID: 3742656327274322764, guid: 1ddb59739fced764aacd4ca8e8665112, type: 3}
   - {fileID: 3742656327274322764, guid: 9c26a23c8c43c5643939ade0a778efa3, type: 3}
+  - {fileID: 3742656327274322764, guid: 24d82782ea766484dab8120d101415dd, type: 3}
 --- !u!4 &1833241600
 Transform:
   m_ObjectHideFlags: 0
@@ -8601,9 +8603,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory:
   - {fileID: 3742656327274322764, guid: 51b5d63bca05b4e43840393018db3011, type: 3}
-  - {fileID: 3742656327274322764, guid: 24d82782ea766484dab8120d101415dd, type: 3}
-  - {fileID: 3742656327274322764, guid: 9c26a23c8c43c5643939ade0a778efa3, type: 3}
+  - {fileID: 3742656327274322764, guid: ab3b67ccb474c1f45a3ef6a06b655ef9, type: 3}
   - {fileID: 3742656327274322764, guid: 1ddb59739fced764aacd4ca8e8665112, type: 3}
+  - {fileID: 3742656327274322764, guid: 9c26a23c8c43c5643939ade0a778efa3, type: 3}
+  - {fileID: 3742656327274322764, guid: 24d82782ea766484dab8120d101415dd, type: 3}
   inventoryIndex: 0
   inventoryCell: {fileID: 1337680544}
   hover: {fileID: 3742656327274322764, guid: 0992b188337116d439eb6db168d06a08, type: 3}

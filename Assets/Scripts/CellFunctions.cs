@@ -7,13 +7,17 @@ public class CellFunctions : MonoBehaviour
 {	
 	public GameObject gridManager;
 	public GameObject player;
+	public static Vector3[] rotations;
+	public static int rotIndex;
+	
 	private static GameObject[] inventory;
 	
 	void Start() {
 		inventory = player.GetComponent<Placing>().inventory;
-		gridHeight = 100;
-		gridWidth = 100;
-		gridLength = 100;
+		rotations = Placing.rotations;
+		gridHeight = 300;
+		gridWidth = 300;
+		gridLength = 300;
 		gridManager.GetComponent<GridManager>().InitGridSize();
 	}
 	void Update() {
@@ -35,13 +39,14 @@ public class CellFunctions : MonoBehaviour
 	}
 	
 	public static Direction_e[] directionUpdateOrder = { Direction_e.RIGHT, Direction_e.LEFT, Direction_e.UP, Direction_e.DOWN , Direction_e.FRONT , Direction_e.BACK };
-    public static CellType_e[] cellUpdateOrder = {CellType_e.MOVER, CellType_e.FIXEDROTATOR};
+    public static CellType_e[] cellUpdateOrder = {CellType_e.GENERATOR, CellType_e.FIXEDROTATOR, CellType_e.MOVER};
     public static Dictionary<CellType_e, CellUpdateType_e> cellUpdateTypeDictionary = new Dictionary<CellType_e, CellUpdateType_e>
     {
+		[CellType_e.GENERATOR] = CellUpdateType_e.TRACKED,
         [CellType_e.MOVER] = CellUpdateType_e.TRACKED,
         [CellType_e.WALL] = CellUpdateType_e.BASE,
         [CellType_e.TRASH] = CellUpdateType_e.BASE,
-		[CellType_e.FIXEDROTATOR] = CellUpdateType_e.TRACKED,
+		[CellType_e.FIXEDROTATOR] = CellUpdateType_e.TICKED,
     };
 
     //An disctionary defining the specialized ID's used in sorting, for tracked and 
@@ -89,8 +94,51 @@ public class CellFunctions : MonoBehaviour
 		if (prefab == inventory[0]) {
 			r = CellType_e.MOVER;
 		} else if (prefab == inventory[1]) {
-			
+			r = CellType_e.GENERATOR;
+		} else if (prefab == inventory[2]) {
+			r = CellType_e.FIXEDROTATOR;
+		} else if (prefab == inventory[3]) {
+			r = CellType_e.WALL;
+		} else if (prefab == inventory[4]) {
+			r = CellType_e.GENERATOR;
 		} else {
+			throw new NotImplementedException("Me when u forgor to update this if :skull:");
+		}
+		return r;
+	}
+	public static CellType_e StringToCellType_e(string name) {
+		CellType_e r = CellType_e.WALL;
+		if (name == "MOVER") {
+			r = CellType_e.MOVER;
+		} else if (name == "GENERATOR") {
+			r = CellType_e.GENERATOR;
+		} else if (name == "FIXEDROTATOR") {
+			r = CellType_e.FIXEDROTATOR;
+		} else if (name == "WALL") {
+			r = CellType_e.WALL;
+		} else if (name == "GENERATOR") {
+			r = CellType_e.GENERATOR;
+		} else {
+			throw new NotImplementedException("Me when u forgor to update this if :skull:");
+		}
+		return r;
+	}
+	public static Direction_e Vector3ToDirection_e(Vector3 dir) {
+		Direction_e r = Direction_e.FRONT;
+		if (dir == rotations[0]) {
+			r = Direction_e.FRONT;
+		} else if (dir == rotations[1]) {
+			r = Direction_e.RIGHT;
+		} else if (dir == rotations[2]) {
+			r = Direction_e.DOWN;
+		} else if (dir == rotations[3]) {
+			r = Direction_e.BACK;
+		} else if (dir == rotations[4]) {
+			r = Direction_e.LEFT;
+		} else if (dir == rotations[5]) {
+			r = Direction_e.UP;
+		} else {
+			Debug.Log(dir);
 			throw new NotImplementedException("Me when u forgor to update this if :skull:");
 		}
 		return r;

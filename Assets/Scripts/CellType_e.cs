@@ -1,7 +1,8 @@
 ﻿public enum CellType_e
 {
 	MOVER,
-	WALL,
+	GENERATOR,
 	FIXEDROTATOR,
+	WALL,
 	TRASH
 }

@@ -78,8 +78,8 @@ public class Cell : MonoBehaviour
     }
 
 	public void UpdatePosAndRot() {
-		gameObject.transform.position = this.position;
-		gameObject.transform.eulerAngles = Placing.rotations[this.rotation];
+		//gameObject.transform.position = this.position;
+		//gameObject.transform.eulerAngles = Placing.rotations[this.rotation];
 	}
 
     //Called when attempting to move.

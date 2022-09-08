@@ -227,7 +227,7 @@ MonoBehaviour:
   suppresed: 0
   deleted: 0
   generated: 0
-  animate: 0
+  animate: 1
   queuedForPositionSorting: 0
   queuedForRotationSorting: 0
 --- !u!1 &4177117758718158297

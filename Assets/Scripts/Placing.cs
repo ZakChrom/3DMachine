@@ -17,7 +17,7 @@ public class Placing : MonoBehaviour
 	public GameObject player;
 	
 	public static Vector3[] rotations = new Vector3[6];
-	public int rotIndex = 0;
+	public static int rotIndex = 0;
 	
 	public LayerMask ignore;
 	
@@ -110,7 +110,7 @@ public class Placing : MonoBehaviour
 				pos.x = Mathf.RoundToInt(hitInfo.point.x+hitInfo.normal.x/2);
 				pos.y = Mathf.RoundToInt(hitInfo.point.y+hitInfo.normal.y/2);
 				pos.z = Mathf.RoundToInt(hitInfo.point.z+hitInfo.normal.z/2);
-				Cell c = GridManager.instance.SpawnCell(CellType_e.MOVER, pos, rotations[rotIndex], (Direction_e)rotIndex, false);
+				Cell c = GridManager.instance.SpawnCell(block, pos, rotations[rotIndex], (Direction_e)rotIndex, false);
 				c.setPosition(pos);
 				//GameObject a = Instantiate(block, pos, Quaternion.Euler(0,0,0));
 				//a.transform.localEulerAngles = rotations[rotIndex];
@@ -118,7 +118,7 @@ public class Placing : MonoBehaviour
 				pos.x = Mathf.RoundToInt(hitInfo.point.x);
 				pos.y = Mathf.RoundToInt(hitInfo.point.y);
 				pos.z = Mathf.RoundToInt(hitInfo.point.z);
-				Cell c = GridManager.instance.SpawnCell(CellType_e.MOVER, pos, rotations[rotIndex], (Direction_e)rotIndex, false);
+				Cell c = GridManager.instance.SpawnCell(block, pos, rotations[rotIndex], (Direction_e)rotIndex, false);
 				c.setPosition(pos);
 				//GameObject a = Instantiate(block, pos, Quaternion.Euler(0,0,0));
 				//a.transform.localEulerAngles = rotations[rotIndex];
