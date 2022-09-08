@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class CellFunctions : MonoBehaviour
@@ -90,7 +91,7 @@ public class CellFunctions : MonoBehaviour
 		} else if (prefab == inventory[1]) {
 			
 		} else {
-			throw throw new Exception("Me when u forgor to update this if :skull:");
+			throw new NotImplementedException("Me when u forgor to update this if :skull:");
 		}
 		return r;
 	}

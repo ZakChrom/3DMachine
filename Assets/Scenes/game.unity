@@ -6048,6 +6048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridManager: {fileID: 1833241598}
+  player: {fileID: 2104232815}
 --- !u!4 &871864495
 Transform:
   m_ObjectHideFlags: 0

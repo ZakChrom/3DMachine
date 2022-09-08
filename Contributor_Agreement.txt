@@ -1,0 +1,4 @@
+By contributing any assets(1) to the project you agree that full rights will be granted to the creators(2) for free use. This includes but is not limited to use in closed source, and commercial projects.
+
+1 This includes any ideas, files, art assets, code, or other licensable contribution.
+2 Creators can be reached at these emails: londonh.dev@gmail.com, leoeppersondev@gmail.com

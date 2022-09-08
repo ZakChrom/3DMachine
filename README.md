@@ -1,5 +1,9 @@
 # 3D Machine
 
+## IMPORTANT
+This Cell Machine "remake" uses alot of code from CMMM, so it has the same license as CMMM and it is considered a mod of CMMM
+
+
 ## Controls
 ~~~
 e/q      rotate
