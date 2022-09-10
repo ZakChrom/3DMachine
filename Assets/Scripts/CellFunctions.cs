@@ -26,10 +26,33 @@ public class CellFunctions : MonoBehaviour
 		}
 	}
 	public void Reset() {
-		foreach (GameObject g in GameObject.FindGameObjectsWithTag("cell")) {
-			g.GetComponent<Cell>().transform.position = g.GetComponent<Cell>().spawnPosition;
-		}
-		gridManager.GetComponent<GridManager>().Reset();
+        GridManager.instance.Reset();
+
+        LinkedListNode<Cell> selectedNode = CellFunctions.generatedCellList.First;
+		{
+            Cell cell;
+            while (selectedNode != null)
+            {
+                cell = selectedNode.Value;
+                selectedNode = selectedNode.Next;
+                cell.Delete(true);
+            }
+        }
+
+        CellFunctions.generatedCellList.Clear();
+
+        foreach (Cell cell in CellFunctions.cellList)
+        {
+            cell.Delete(false);
+        }
+
+        foreach (Cell cell in CellFunctions.cellList)
+        {
+            cell.gameObject.SetActive(true);
+            cell.Setup(cell.spawnPosition, (Direction_e)cell.spawnRotation, false);
+            cell.suppresed = false;
+        }
+        GridManager.enemyCount = GridManager.initialEnemyCount;
 	}
 	public void Save() {
 		GUIUtility.systemCopyBuffer = Worlds.Save();
@@ -39,7 +62,7 @@ public class CellFunctions : MonoBehaviour
 	}
 	
 	public static Direction_e[] directionUpdateOrder = { Direction_e.RIGHT, Direction_e.LEFT, Direction_e.UP, Direction_e.DOWN , Direction_e.FRONT , Direction_e.BACK };
-    public static CellType_e[] cellUpdateOrder = {CellType_e.GENERATOR, CellType_e.FIXEDROTATOR, CellType_e.MOVER};
+    public static CellType_e[] cellUpdateOrder = {CellType_e.GENERATOR, CellType_e.FIXEDROTATOR, CellType_e.CWROTATER, CellType_e.CCWROTATER, CellType_e.MOVER};
     public static Dictionary<CellType_e, CellUpdateType_e> cellUpdateTypeDictionary = new Dictionary<CellType_e, CellUpdateType_e>
     {
 		[CellType_e.GENERATOR] = CellUpdateType_e.TRACKED,
@@ -47,6 +70,11 @@ public class CellFunctions : MonoBehaviour
         [CellType_e.WALL] = CellUpdateType_e.BASE,
         [CellType_e.TRASH] = CellUpdateType_e.BASE,
 		[CellType_e.FIXEDROTATOR] = CellUpdateType_e.TICKED,
+		[CellType_e.ENEMY] = CellUpdateType_e.BASE,
+		[CellType_e.SLIDE] = CellUpdateType_e.BASE,
+        [CellType_e.PUSH] = CellUpdateType_e.BASE,
+		[CellType_e.CWROTATER] = CellUpdateType_e.TICKED,
+        [CellType_e.CCWROTATER] = CellUpdateType_e.TICKED
     };
 
     //An disctionary defining the specialized ID's used in sorting, for tracked and 
@@ -101,6 +129,16 @@ public class CellFunctions : MonoBehaviour
 			r = CellType_e.WALL;
 		} else if (prefab == inventory[4]) {
 			r = CellType_e.GENERATOR;
+		} else if (prefab == inventory[5]) {
+			r = CellType_e.ENEMY;
+		} else if (prefab == inventory[ 6]) {
+			r = CellType_e.SLIDE;
+		} else if (prefab == inventory[7]) {
+			r = CellType_e.PUSH;
+		} else if (prefab == inventory[8]) {
+			r = CellType_e.CWROTATER;
+		} else if (prefab == inventory[9]) {
+			r = CellType_e.CCWROTATER;
 		} else {
 			throw new NotImplementedException("Me when u forgor to update this if :skull:");
 		}
@@ -118,6 +156,43 @@ public class CellFunctions : MonoBehaviour
 			r = CellType_e.WALL;
 		} else if (name == "GENERATOR") {
 			r = CellType_e.GENERATOR;
+		} else if (name == "ENEMY") {
+			r = CellType_e.ENEMY;
+		} else if (name == "SLIDE") {
+			r = CellType_e.SLIDE;
+		} else if (name == "PUSH") {
+			r = CellType_e.PUSH;
+		} else if (name == "CWROTATER") {
+			r = CellType_e.CWROTATER;
+		} else if (name == "CCWROTATER") {
+			r = CellType_e.CCWROTATER;
+		} else {
+			throw new NotImplementedException("Me when u forgor to update this if :skull:");
+		}
+		return r;
+	}
+	public static CellType_e IntToCellType_e(int num) {
+		CellType_e r = CellType_e.WALL;
+		if (num == 0) {
+			r = CellType_e.MOVER;
+		} else if (num == 1) {
+			r = CellType_e.GENERATOR;
+		} else if (num == 2) {
+			r = CellType_e.FIXEDROTATOR;
+		} else if (num == 3) {
+			r = CellType_e.WALL;
+		} else if (num == 4) {
+			r = CellType_e.GENERATOR;
+		} else if (num == 5) {
+			r = CellType_e.ENEMY;
+		} else if (num == 6) {
+			r = CellType_e.SLIDE;
+		} else if (num == 7) {
+			r = CellType_e.PUSH;
+		} else if (num == 8) {
+			r = CellType_e.CWROTATER;
+		} else if (num == 9) {
+			r = CellType_e.CCWROTATER;
 		} else {
 			throw new NotImplementedException("Me when u forgor to update this if :skull:");
 		}
@@ -138,7 +213,25 @@ public class CellFunctions : MonoBehaviour
 		} else if (dir == rotations[5]) {
 			r = Direction_e.UP;
 		} else {
-			Debug.Log(dir);
+			throw new NotImplementedException("Me when u forgor to update this if :skull:");
+		}
+		return r;
+	}
+	public static Vector3 Direction_eToVector3(Direction_e dir) {
+		Vector3 r = rotations[0];
+		if (dir == Direction_e.FRONT) {
+			r = rotations[0];
+		} else if (dir == Direction_e.RIGHT) {
+			r = rotations[1];
+		} else if (dir == Direction_e.DOWN) {
+			r = rotations[2];
+		} else if (dir == Direction_e.BACK) {
+			r = rotations[3];
+		} else if (dir == Direction_e.LEFT) {
+			r = rotations[4];
+		} else if (dir == Direction_e.UP) {
+			r = rotations[5];
+		} else {
 			throw new NotImplementedException("Me when u forgor to update this if :skull:");
 		}
 		return r;

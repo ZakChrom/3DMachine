@@ -18,8 +18,6 @@ public class GridManager : MonoBehaviour
 
     public GameObject[] cellPrefabs;
 
-	public static Cell[] generated_pgens;
-
     public static float animationLength = .2f;
     float timeSinceLastUpdate;
 

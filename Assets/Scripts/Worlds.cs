@@ -14,18 +14,16 @@ public class Worlds {
 		string path = Application.streamingAssetsPath + "/worlds/world.w";
 		ClearFile(path);
 		Transform a = GameObject.FindGameObjectsWithTag("Player")[0].transform;
-		string data = $"Player;{a.position.x};{a.position.y};{a.position.z};{a.eulerAngles.x};{a.eulerAngles.y};{a.eulerAngles.z}|";
+		string data = $"3V1;-1.{a.position.x}.{a.position.y}.{a.position.z}.0";
 		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("cell")) {
 			if(obj.name != "ground" && obj.name != "inventoryCell") {
-				string name = obj.GetComponent<Cell>().cellType.ToString();
-				data += $"{name};";
-				data += $"{obj.transform.position.x};";
-				data += $"{obj.transform.position.y};";
-				data += $"{obj.transform.position.z};";
-				
-				data += $"{obj.transform.eulerAngles.x};";
-				data += $"{obj.transform.eulerAngles.y};";
-				data += $"{obj.transform.eulerAngles.z}|";
+				int id = (int)obj.GetComponent<Cell>().cellType;
+				data += $";{id}.";
+				data += $"{obj.transform.position.x}.";
+				data += $"{obj.transform.position.y}.";
+				data += $"{obj.transform.position.z}.";
+			
+				data += $"{obj.GetComponent<Cell>().rotation}";
 			}
 		}
 		using (StreamWriter writer = new StreamWriter(path, true)) {
@@ -35,8 +33,31 @@ public class Worlds {
 		return data;
 	}
 	public static void Load() {
-		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("cell")) {if(obj.name != "ground" && obj.name != "inventoryCell") {Object.Destroy(obj);}}
-		string[] output = GUIUtility.systemCopyBuffer.Split('|');
+		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("cell")) {if(obj.name != "ground" && obj.name != "inventoryCell") {obj.GetComponent<Cell>().Delete(true);}}
+		string code = GUIUtility.systemCopyBuffer;
+		if (code.StartsWith("3V1;")) {
+			code = code.Replace("3V1;", "");
+			foreach (string c in code.Split(";")) {
+				string[] cellData = c.Split(".");
+				if (cellData[0] == "-1") {
+					GameObject.FindGameObjectsWithTag("Player")[0].transform.position = new Vector3(float.Parse(cellData[1]), float.Parse(cellData[2]), float.Parse(cellData[3]));
+					GameObject.FindGameObjectsWithTag("Player")[0].transform.eulerAngles = CellFunctions.Direction_eToVector3((Direction_e)int.Parse(cellData[4]));
+				} else {
+					GridManager.instance.SpawnCell(
+						CellFunctions.IntToCellType_e(int.Parse(cellData[0])),
+						new Vector3(float.Parse(cellData[1]), float.Parse(cellData[2]), float.Parse(cellData[3])), 
+						CellFunctions.Direction_eToVector3((Direction_e)int.Parse(cellData[4])), 
+						(Direction_e)int.Parse(cellData[4]),
+						false
+					);
+				}
+			}
+			//id.x.y.z.r
+			//3V1;-1.0.100.0.0;0.0.0.0.0
+			//
+			return;
+		}
+		string[] output = code.Split('|');
 		foreach (string o in output) {
 			string[] oo = o.Split(';');
 			if(oo[0] != "") {
