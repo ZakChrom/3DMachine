@@ -6,18 +6,24 @@ This Cell Machine "remake" uses alot of code from CMMM, so it has the same licen
 
 ## Controls
 ~~~
-e/q      rotate
-z/x      switch cells
-w/a/s/d  moving
-mouse    rotate camera
-esc      open the menu
-r        play/pause the simulation
+e/q         rotate
+z/x/scroll  switch cells
+w/a/s/d     moving
+mouse       rotate camera
+esc         open the menu
+r           play/pause the simulation
 ~~~
 
 ## Cells
 ~~~
 Mover
-Trash
-Immobile
+Generator
 Fixed Rotator
+Immobile
+Trash
+Enemy (Broken)
+Slide
+Push
+CW Rotator (weird)
+CCW Rotator (weird)
 ~~~
