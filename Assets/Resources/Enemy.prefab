@@ -228,7 +228,8 @@ MonoBehaviour:
   deleted: 0
   generated: 0
   animate: 1
-  deathParticals: {fileID: 0}
+  deathParticals: {fileID: 6123038088851175037, guid: c30f1f9a470a0444cbb9422380c374a1,
+    type: 3}
 --- !u!1 &4177117758718158297
 GameObject:
   m_ObjectHideFlags: 0

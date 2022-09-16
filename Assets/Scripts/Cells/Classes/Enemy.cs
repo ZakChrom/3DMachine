@@ -28,6 +28,7 @@ public class Enemy : Cell
         else this.Delete(false);
 
         GameObject.FindWithTag("Audio").GetComponent<AudioManager>().Play("Explosion");
+		Instantiate(deathParticals, this.gameObject.transform.position, Quaternion.identity);
         return (true, true);
     }
 }
