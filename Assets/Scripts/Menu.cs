@@ -40,7 +40,7 @@ public class Menu : MonoBehaviour
 	}
 	public void Sensitivity() {
 		cam.GetComponent<Mouselook>().mouseSensitivity = slider.value;
-	}	
+	}
 	public void Reload() {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
