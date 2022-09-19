@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class GridManager : MonoBehaviour
 {
     public static GridManager instance;
 
 	public GameObject player;
+	public GameObject counter;
 	
     public static int currentLevel;
     public static int enemyCount;
@@ -128,6 +130,7 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         initialEnemyCount = enemyCount;
+		counter.GetComponent<TextMeshProUGUI>().text = "0";
     }
 
     public Cell SpawnCell(CellType_e cellType, Vector3 position, Vector3 rotation, Direction_e rotation2, bool generated) {
@@ -255,7 +258,7 @@ public class GridManager : MonoBehaviour
     private void Update()
     {
         timeSinceLastUpdate += Time.deltaTime;
-
+		counter.GetComponent<TextMeshProUGUI>().text = $"{stepCount}";
         //Animate every cells rotation and transformation from last rotation and last position.
 
         foreach (Cell cell in CellFunctions.cellList) {

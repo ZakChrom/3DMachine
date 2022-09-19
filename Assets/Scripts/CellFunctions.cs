@@ -24,6 +24,9 @@ public class CellFunctions : MonoBehaviour
 		if (Input.GetKeyDown("r")) {
 			GridManager.playSimulation = !GridManager.playSimulation;
 		}
+		if (Input.GetKeyDown("f")) {
+			Reset();
+		}
 	}
 	public void Reset() {
         GridManager.instance.Reset();
