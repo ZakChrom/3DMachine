@@ -4013,7 +4013,7 @@ MonoBehaviour:
   - name: Explosion
     clip: {fileID: 8300000, guid: 7533543885ff0394283f820e5028e2f7, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
 --- !u!4 &2096399208
 Transform:

@@ -70,7 +70,9 @@ public class Cell : MonoBehaviour
         this.gameObject.SetActive(false);
         this.deleted = true;
         if (destroy) {
-            CellFunctions.cellList.Remove(cellListNode);
+			try{
+				CellFunctions.cellList.Remove(cellListNode);
+			} catch(System.InvalidOperationException) {}
             if(generatedCellListNode != null)
                 CellFunctions.generatedCellList.Remove(generatedCellListNode);
             Destroy(this.gameObject);
