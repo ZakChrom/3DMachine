@@ -1,5 +1,4 @@
-﻿public enum CellType_e
-{
+﻿public enum CellType_e {
 	MOVER,
 	GENERATOR,
 	FIXEDROTATOR,

@@ -3519,7 +3519,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 71ef5e30075c9b24ea253a6c627f6424, type: 2}
+  - {fileID: 2100000, guid: edaaf41430533ed42b690a6ae918de61, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4147,7 +4147,7 @@ MonoBehaviour:
   sounds:
   - name: Explosion
     clip: {fileID: 8300000, guid: 7533543885ff0394283f820e5028e2f7, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     source: {fileID: 0}
 --- !u!4 &2096399208

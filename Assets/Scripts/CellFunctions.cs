@@ -121,122 +121,57 @@ public class CellFunctions : MonoBehaviour
     }
 	
 	public static CellType_e PrefabToCellType_e(GameObject prefab) {
-		CellType_e r = CellType_e.WALL;
-		if (prefab == inventory[0]) {
-			r = CellType_e.MOVER;
-		} else if (prefab == inventory[1]) {
-			r = CellType_e.GENERATOR;
-		} else if (prefab == inventory[2]) {
-			r = CellType_e.FIXEDROTATOR;
-		} else if (prefab == inventory[3]) {
-			r = CellType_e.WALL;
-		} else if (prefab == inventory[4]) {
-			r = CellType_e.GENERATOR;
-		} else if (prefab == inventory[5]) {
-			r = CellType_e.ENEMY;
-		} else if (prefab == inventory[ 6]) {
-			r = CellType_e.SLIDE;
-		} else if (prefab == inventory[7]) {
-			r = CellType_e.PUSH;
-		} else if (prefab == inventory[8]) {
-			r = CellType_e.CWROTATER;
-		} else if (prefab == inventory[9]) {
-			r = CellType_e.CCWROTATER;
-		} else {
-			throw new NotImplementedException("Me when u forgor to update this if :skull:");
+		for (int i = 0; i < inventory.Length; i++) {
+			if (prefab == inventory[i]) {
+				return (CellType_e)i;
+			}
 		}
-		return r;
+		throw new InvalidCastException("Invalid prefab: " + prefab.name);
 	}
 	public static CellType_e StringToCellType_e(string name) {
-		CellType_e r = CellType_e.WALL;
-		if (name == "MOVER") {
-			r = CellType_e.MOVER;
-		} else if (name == "GENERATOR") {
-			r = CellType_e.GENERATOR;
-		} else if (name == "FIXEDROTATOR") {
-			r = CellType_e.FIXEDROTATOR;
-		} else if (name == "WALL") {
-			r = CellType_e.WALL;
-		} else if (name == "GENERATOR") {
-			r = CellType_e.GENERATOR;
-		} else if (name == "ENEMY") {
-			r = CellType_e.ENEMY;
-		} else if (name == "SLIDE") {
-			r = CellType_e.SLIDE;
-		} else if (name == "PUSH") {
-			r = CellType_e.PUSH;
-		} else if (name == "CWROTATER") {
-			r = CellType_e.CWROTATER;
-		} else if (name == "CCWROTATER") {
-			r = CellType_e.CCWROTATER;
-		} else {
-			throw new NotImplementedException("Me when u forgor to update this if :skull:");
-		}
-		return r;
+		return (CellType_e)Enum.Parse(typeof(CellType_e), name);
 	}
 	public static CellType_e IntToCellType_e(int num) {
-		CellType_e r = CellType_e.WALL;
-		if (num == 0) {
-			r = CellType_e.MOVER;
-		} else if (num == 1) {
-			r = CellType_e.GENERATOR;
-		} else if (num == 2) {
-			r = CellType_e.FIXEDROTATOR;
-		} else if (num == 3) {
-			r = CellType_e.WALL;
-		} else if (num == 4) {
-			r = CellType_e.GENERATOR;
-		} else if (num == 5) {
-			r = CellType_e.ENEMY;
-		} else if (num == 6) {
-			r = CellType_e.SLIDE;
-		} else if (num == 7) {
-			r = CellType_e.PUSH;
-		} else if (num == 8) {
-			r = CellType_e.CWROTATER;
-		} else if (num == 9) {
-			r = CellType_e.CCWROTATER;
+		int numValues = Enum.GetValues(typeof(CellType_e)).Length;
+		if (num >= 0 && num < numValues) {
+			return (CellType_e)num;
 		} else {
-			throw new NotImplementedException("Me when u forgor to update this if :skull:");
+			throw new InvalidCastException("Invalid cell type: " + num);
 		}
-		return r;
 	}
 	public static Direction_e Vector3ToDirection_e(Vector3 dir) {
-		Direction_e r = Direction_e.FRONT;
-		if (dir == rotations[0]) {
-			r = Direction_e.FRONT;
-		} else if (dir == rotations[1]) {
-			r = Direction_e.RIGHT;
-		} else if (dir == rotations[2]) {
-			r = Direction_e.DOWN;
-		} else if (dir == rotations[3]) {
-			r = Direction_e.BACK;
-		} else if (dir == rotations[4]) {
-			r = Direction_e.LEFT;
-		} else if (dir == rotations[5]) {
-			r = Direction_e.UP;
+		var map = new Dictionary<Vector3, Direction_e> {
+			{ rotations[0], Direction_e.FRONT },
+			{ rotations[1], Direction_e.RIGHT },
+			{ rotations[2], Direction_e.DOWN },
+			{ rotations[3], Direction_e.BACK },
+			{ rotations[4], Direction_e.LEFT },
+			{ rotations[5], Direction_e.UP }
+		};
+
+		Direction_e result;
+		if (map.TryGetValue(dir, out result)) {
+			return result;
 		} else {
-			throw new NotImplementedException("Me when u forgor to update this if :skull:");
+			throw new InvalidCastException("Invalid direction: " + dir);
 		}
-		return r;
 	}
 	public static Vector3 Direction_eToVector3(Direction_e dir) {
-		Vector3 r = rotations[0];
-		if (dir == Direction_e.FRONT) {
-			r = rotations[0];
-		} else if (dir == Direction_e.RIGHT) {
-			r = rotations[1];
-		} else if (dir == Direction_e.DOWN) {
-			r = rotations[2];
-		} else if (dir == Direction_e.BACK) {
-			r = rotations[3];
-		} else if (dir == Direction_e.LEFT) {
-			r = rotations[4];
-		} else if (dir == Direction_e.UP) {
-			r = rotations[5];
-		} else {
-			throw new NotImplementedException("Me when u forgor to update this if :skull:");
+		switch (dir) {
+			case Direction_e.FRONT:
+				return rotations[0];
+			case Direction_e.RIGHT:
+				return rotations[1];
+			case Direction_e.DOWN:
+				return rotations[2];
+			case Direction_e.BACK:
+				return rotations[3];
+			case Direction_e.LEFT:
+				return rotations[4];
+			case Direction_e.UP:
+				return rotations[5];
+			default:
+				throw new InvalidCastException("Invalid direction: " + dir);
 		}
-		return r;
 	}
 }
