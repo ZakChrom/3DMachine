@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 	Vector3 startingPos;
 	bool isGrounded;
 	bool isCeiling;
-	bool inMenu;
+	int MenuType;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +38,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		inMenu = GameObject.FindGameObjectWithTag("Menu").GetComponent<Menu>().inMenu;
+		MenuType = GameObject.FindGameObjectWithTag("Menu").GetComponent<Menu>().MenuType;
 		controller.detectCollisions = !noclip;
 		controller.enabled = !noclip;
-		if(!inMenu) {
+		if(MenuType == 0) {
 			if (!fly) {
 				isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 				isCeiling = Physics.CheckSphere(ceilingCheck.position, groundDistance, groundMask);

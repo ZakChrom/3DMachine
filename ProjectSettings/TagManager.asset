@@ -10,6 +10,9 @@ TagManager:
   - CellFunctions
   - ground
   - Audio
+  - MenuStuff2
+  - MenuStuff3
+  - MenuStuff4
   layers:
   - Default
   - TransparentFX

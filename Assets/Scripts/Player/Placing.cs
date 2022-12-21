@@ -22,7 +22,7 @@ public class Placing : MonoBehaviour
 	public LayerMask ignore;
 	
 	Vector3 pos;
-	bool inMenu;
+	int MenuType;
 
 	public float reach = 30f;
 	
@@ -49,8 +49,8 @@ public class Placing : MonoBehaviour
 		if (rotIndex >= rotations.Length){rotIndex = 0;}
 		if (inventoryIndex < 0) {inventoryIndex = inventory.Length-1;}
 		if (inventoryIndex >= inventory.Length){inventoryIndex = 0;}
-		inMenu = GameObject.FindGameObjectWithTag("Menu").GetComponent<Menu>().inMenu;
-		if(!inMenu) {
+		MenuType = GameObject.FindGameObjectWithTag("Menu").GetComponent<Menu>().MenuType;
+		if(MenuType == 0) {
 			if(Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out RaycastHit hitInfo2, reach, ignore)) {
 				Debug.DrawRay(this.transform.position, this.transform.TransformDirection(Vector3.forward) * hitInfo2.distance, Color.red);
 				if(hitInfo2.transform.tag == "cell" || hitInfo2.transform.tag == "ground") {

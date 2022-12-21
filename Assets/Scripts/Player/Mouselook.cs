@@ -9,13 +9,13 @@ public class Mouselook : MonoBehaviour
 	
 	public Transform playerBody;
 	
-	bool inMenu;
+	int MenuType;
 
     // Update is called once per frame
     void Update()
     {
-		inMenu = GameObject.FindGameObjectWithTag("Menu").GetComponent<Menu>().inMenu;
-		if(!inMenu) {
+		MenuType = GameObject.FindGameObjectWithTag("Menu").GetComponent<Menu>().MenuType;
+		if(MenuType == 0) {
 			float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 			float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 			
